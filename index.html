@@ -138,13 +138,13 @@
 .clinic-carousel{
   position: relative;
   width: 100%;
-  height: 560px;   /* REQUIRED so images overlap instead of stacking */
+  height: 560px;   
   overflow: hidden;
   border-radius: 14px;
 }
 
 .clinic-carousel img{
-  position: absolute;   /* makes images stack */
+  position: absolute;   
   top: 0;
   left: 0;
 
@@ -176,6 +176,17 @@
   min-width: calc(33.33% - 12px);
   padding: 18px;
   text-align: center;
+}
+@media(max-width:900px){
+  .review-card{
+    min-width: calc(50% - 12px);
+  }
+}
+
+@media(max-width:600px){
+  .review-card{
+    min-width: 100%;
+  }
 }
 
 /* Mobile responsive */
@@ -209,8 +220,6 @@
   color:#334155;
   line-height:1.6;
 }
-
-
 }
 
     .two-col{display:grid; gap:22px}
@@ -387,8 +396,8 @@
     ✔ Advanced Soft-Tissue Procedures  
     ✔ Emergency & Trauma Care Expert  
     ✔ Fear-Free Certified Handling  
-  </div>
-</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -532,7 +541,6 @@
           </p>
           <strong>— Abhimanyu Kumar</strong>
         </div>
-
         <div class="card review-card">
           ⭐⭐⭐⭐
           <p class="muted">
@@ -639,8 +647,9 @@
       <div class="muted" style="text-align:center; font-size:12px; margin-top:16px">© <span id="year"></span> Canine Pet and Veterinary Clinic</div>
     </div>
   </footer>
-
   <script>
+
+// JavaScript starts here
 
 // Dynamic year
 document.getElementById('year').textContent =
@@ -667,6 +676,7 @@ form.addEventListener('submit', async function(e){
   const data = {
     name: form.name.value,
     phone: form.phone.value,
+    email: form.email.value,
     date: form.date.value,
     petType: form.petType.value,
     message: form.message.value
@@ -675,17 +685,21 @@ form.addEventListener('submit', async function(e){
   try {
     console.log("body1", data);
     console.log("body2", form);
-    // console.log("body3", formdata);
-    // console.log("body4", formdata);
-    await fetch("https://clinic-backend-16c3.onrender.com/appointment", {
+
+const response = await fetch("https://clinic-backend-16c3.onrender.com/appointment", {
    method: "POST",
    headers: {
       "Content-Type": "application/json"
    },
    body: JSON.stringify(data)
 });
-    alert("Appointment submitted successfully!"); 
-    form.reset();
+
+if (response.ok) {
+   document.getElementById("form-success").style.display = "block";
+   form.reset();
+} else {
+   alert("Something went wrong. Please try again.");
+}
 
   } catch (error) {
     alert("Something went wrong. Try again.");
@@ -721,18 +735,13 @@ if(clinicSlides.length > 1){
     clinicSlides[clinicIndex].classList.add('active');
 
   }, 3000);
-
 }
 // Infinite testimonial carousel (3 visible cards)
 
-const track =
-document.querySelector(".review-track");
-
-let cards =
-document.querySelectorAll(".review-card");
+const track = document.querySelector(".review-track");
+let cards = document.querySelectorAll(".review-card");
 
 const gap = 18;
-
 const cloneCount = 3;
 
 // clone first 3 cards and append them
@@ -742,8 +751,7 @@ for(let i = 0; i < cloneCount; i++){
   cards[i].cloneNode(true);
   track.appendChild(clone);
 }
-cards =
-document.querySelectorAll(".review-card");
+cards = document.querySelectorAll(".review-card");
 
 let index = 0;
 
