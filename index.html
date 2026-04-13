@@ -656,7 +656,7 @@ fetch("https://clinic-backend-production-8e93.up.railway.app/");
 
 setInterval(() => {
   fetch("https://clinic-backend-production-8e93.up.railway.app/");
-}, 4 * 60 * 1000);
+}, 2 * 60 * 1000);
 
 // Dynamic year
 document.getElementById('year').textContent =
@@ -690,7 +690,7 @@ form.addEventListener('submit', async function(e){
   };
 
  try{
-    await fetch("https://clinic-backend-production-8e93.up.railway.app/appointment", {
+    fetch("https://clinic-backend-production-8e93.up.railway.app/appointment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
