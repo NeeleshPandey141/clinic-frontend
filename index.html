@@ -381,7 +381,7 @@
           </div>
         </div>
        <div class="doctor-details">
-  <h3>Dr. Rajiv Pandey, BVSc & MH</h3>
+  <h3>Dr. Rajiv Pandey, BVSc & M  H</h3>
   <div class="role">
     Senior Veterinary Surgeon & Orthopedic Specialist
   </div>
@@ -652,6 +652,10 @@
   <script>
 
 // JavaScript starts here
+
+setInterval(() => {
+  fetch("https://clinic-backend-production-8e93.up.railway.app/");
+}, 4 * 60 * 1000);
 
 // Dynamic year
 document.getElementById('year').textContent =
