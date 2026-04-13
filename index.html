@@ -686,7 +686,7 @@ form.addEventListener('submit', async function(e){
     console.log("body1", data);
     console.log("body2", form);
 
-const response = await fetch("https://clinic-backend-production-8e93.up.railway.app", {
+const response = await fetch("https://clinic-backend-production-8e93.up.railway.app/appointment", {
    method: "POST",
    headers: {
       "Content-Type": "application/json"
