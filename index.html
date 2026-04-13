@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Canine Pet and Veterinary Clinic</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("exdM3pGo8kSMZJiih");</script>
   <style>
     :root{
       --bg: #f6fbf9;
@@ -682,26 +684,26 @@ form.addEventListener('submit', async function(e){
     message: form.message.value
   };
 
-  try {
-    console.log("body1", data);
-    console.log("body2", form);
+ try{
+    await fetch("https://clinic-backend-production-8e93.up.railway.app/appointment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-const response = await fetch("https://clinic-backend-production-8e93.up.railway.app/appointment", {
-   method: "POST",
-   headers: {
-      "Content-Type": "application/json"
-   },
-   body: JSON.stringify(data)
-});
+    await emailjs.send("service_uoewkve", "template_vfkmkrp", {
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+      petType: data.petType,
+      date: data.date,
+      message: data.message
+    });
 
-if (response.ok) {
-   document.getElementById("form-success").style.display = "block";
-   form.reset();
-} else {
-   alert("Something went wrong. Please try again.");
-}
-
-  } catch (error) {
+    document.getElementById("form-success").style.display = "block";
+    form.reset();
+  }
+  catch (error) {
     alert("Something went wrong. Try again.");
     console.error(error);
   }
